@@ -12,15 +12,7 @@ app = Flask(__name__)
 #initial, total, last
 list1 = cf.get_covid_projects()
 listrecorder= [list1,list1,list1]
-# initiallist= cf.get_covid_projects()
-# hometotallist= initiallist
-# lastlist = initiallist
 
-# def update_vars():
-#     initiallist = cf.get_covid_projects()
-#     hometotallist = initiallist
-#     lastlist = initiallist
-#     return None
 
 @app.route("/", methods=["POST","GET"])
 def main_handler():
@@ -63,27 +55,7 @@ def main_handler():
         #get
         return render_template('index.html',page_title="Inputting", the_data=listrecorder[0], errormsg=None)
 
-# @app.route("/#")
-# def main_handler():
-#     projectlist = cf.get_covid_projects()
-#     if projectlist != None:
-#         nextlist = cf.get_covid_projects(nextid=projectlist[0].next)
-#         if nextlist != None:
-#             projectlist += nextlist
-#             return render_template('index.html', page_title="Inputting", the_data=projectlist)
-#         else:
-#             return render_template('index.html', page_title="Inputting", the_data=projectlist,
-#                                    errormsg="No More Results")
-#     else:
-#         return render_template('index.html',page_title="Inputting", the_data=projectlist, errormsg="No More Results")
 
-
-# def greet_person(country, t):
-#     """A helper function that makes greetings"""
-#     if t == "birthday":
-#         return "Happy Birthday this month,  %s!" % (country)
-#     else:
-#         return "Hello %s" % (country)
 
 @app.route("/indexcountry")
 def greet_response_handler():
@@ -100,25 +72,6 @@ def greet_response_handler():
         )
     else:
         return render_template('index.html', page_title="Please Input", errormsg="Please input a country")
-
-
-
-    # if country:
-    #     # if form filled in, greet them using this data
-    #     greet_types = request.args.getlist('greet_type')
-    #     # app.logger.info(greet_types)
-    #     return render_template('indexcountry.html',
-    #         name=country,
-    #         page_title="Greeting Page Response for {}".format(country),
-    #         greetings=[greet_person(country, t) for t in greet_types]
-    #     )
-    # else:
-    #     #if not, then show the form again with a correction to the user
-    #     return render_template('index.html',
-    #         page_title="Greeting Form - Error",
-    #         prompt="How can I greet you if you don't enter a name?")
-
-#METHODS BELOW
 
 
 
