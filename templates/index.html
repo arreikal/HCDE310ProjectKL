@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{page_title}}</title>
+    <link rel="stylesheet" href="../static/style1.css" />
+    <style>
+div.container {
+  clear:both;
+  margin: auto;
+  width: 960px;
+  Height: 350px;
+  border-radius: 25px;
+  background: #73AD21;
+  padding: 20px;
+  overflow:auto;
+  box-shadow: 20px 20px 40px #000000;
+}
+
+.bottom-right {
+  position: absolute;
+    text-align: left;
+  bottom: 100px;
+  left: 600px;
+}
+
+.banner {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
+</head>
+<body>
+
+
+<div class="banner">
+  <img src="../static/cover.jpg" alt="a person on the street with mask: photo by Joe Kibria from Unsplash" style="width:100%;">
+    <div class="centered"><h1 style="color: white">UNMASK YOUR IMPACT:<br>Transparency for COVID Related Charity</h1></div>
+    <div class="bottom-right"><h2>Use this tool to see the COVID-case context of charity projects devoted to easing the impacts of COVID-19.</h2></div>
+</div>
+
+<form action="indexcountry" method="get">
+    <label for="country">Search a specific country:</label>
+    <input type="text" id="country" name="country" /><br />
+    <input type="submit" value="Go" name="gobtn"/>
+</form>
+<p></p>
+<img src="../static/_safest.png" style="width:100%;">
+
+<p style="text-align: center; width:900px;"><br><br>Projects are color coded by "Safety Ratings", based on positive active cases per million people. While this can provide a glimpse into what countries are struggling to keep control of cases, there can be limitations with access to testing, meaning countries deemed "safer" than others aren't necessarily doing better, or could use less help.</div></p>
+
+{% if errormsg == None %}
+
+
+
+
+<!--<div class="cover" style="height:500px">-->
+<!--    <h1>Covid Projects</h1>-->
+<!--</div>-->
+
+
+
+<p></p>
+{% for p in the_data %}
+
+        {% if p.safety == "abysmal" %}
+
+  <div class="containerone">
+
+
+    {% elif p.safety == "atrocious" %}
+
+  <div class="containertwo" >
+
+    {% elif p.safety == "bad" %}
+
+  <div class="containerthree" >
+    {% elif p.safety == "risky" %}
+
+  <div class="containerfour" >
+      {% elif p.safety == "poor" %}
+
+  <div class="containerfive" >
+
+    {% elif p.safety == "okay" %}
+
+  <div class="containersix" >
+    {% elif p.safety == "good" %}
+
+  <div class="containerseven">
+      {% elif p.safety == "great" %}
+
+  <div class="containereight">
+
+    {% elif p.safety == "amazing" %}
+
+  <div class="containernine">
+    {% else %}
+
+  <div class="containerten">
+    {% endif %}
+      <table>
+          <tr>
+          <td class="one">
+              <img src="{{p.picurl}}" alt="{{p.title}}" style="width:175px;"/>
+          </td>
+          <td class="two">
+              <h2>{{p.title}}</h2>
+              <p>{{p.description}}</p>
+              <p><b><br>Funds Raised: ${{p.funding}} out of ${{p.goal}}</b></p>
+              <progress value = "{{p.funding}}" max = "{{p.goal}}" style="width:100%;"/>
+
+
+
+
+
+          </td>
+          <td class="three">
+              <p class="small">Country Information:</p>
+              <h2>{{p.country}}</h2>
+              <p>COVID Cases Per Million:</p>
+              <h3>{{p.activerpermil}}</h3><p><br>Safety Rating:</p> <h3>{{p.safety}}</h3>
+              <a href="{{p.url}}" target="_blank">Go to Project</a>
+          </td>
+          </tr>
+
+
+
+      </table>
+
+
+    </div>
+      <p></p>
+      <p></p>
+
+
+
+{% endfor %}
+
+<form action="#" method="post">
+    <input type="submit" value="More Results" name="morebtn"/>
+</form>
+
+{% else %}
+
+
+      <h3>Error: {{errormsg}}</h3>
+
+{% endif %}
+
+
+
+</body>
+</html>

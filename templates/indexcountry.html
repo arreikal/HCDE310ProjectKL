@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{page_title}}</title>
+    <link rel="stylesheet" href="../static/style1.css" />
+
+    <style>
+div.container {
+  clear:both;
+  margin: auto;
+  width: 960px;
+  Height: 350px;
+  border-radius: 25px;
+  background: #73AD21;
+  padding: 20px;
+  overflow:auto;
+  box-shadow: 20px 20px 40px #000000;
+}
+
+.banner {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.centered.left {
+  position: absolute;
+  top: 50%;
+  left: 100px;
+  transform: translate(-50%, -50%);
+}
+.centered.right {
+  position: absolute;
+  top: 50%;
+  left: 500px;
+  transform: translate(-50%, -50%);
+  text-align: left;
+}
+
+.bottom-right {
+  position: absolute;
+    text-align: left;
+  bottom: 100px;
+  left: 600px;
+}
+
+.bottom-left {
+  position: absolute;
+    text-align: right;
+  bottom: 100px;
+  right: 600px;
+}
+</style>
+
+
+</head>
+<body>
+
+{% if the_data != None %}
+
+
+<div class="banner">
+  <img src="../static/country.png" alt="the continents in blue and purple" style="width:100%;">
+    <div class="centered">
+    <div class="centered left">
+        <h1 style="color:white;">{{the_data[0].country}}</h1>
+    </div>
+    <div class="centered right">
+        <h3>Active Cases Per Million: {{the_data[0].activerpermil}}</h3>
+        <h3>Deaths Per Million: {{deaths(the_data[0].country)}}</h3>
+        <h3><i>(Questionable) Safety Rating: {{the_data[0].safety}}</i></h3>
+    </div>
+    </div>
+</div>
+<p></p>
+<img src="../static/_safest.png" style="width:100%;">
+<p></p>
+{% for p in the_data %}
+
+    {% if p.safety == "abysmal" %}
+
+  <div class="containerone">
+
+
+    {% elif p.safety == "atrocious" %}
+
+  <div class="containertwo" >
+
+    {% elif p.safety == "bad" %}
+
+  <div class="containerthree" >
+    {% elif p.safety == "risky" %}
+
+  <div class="containerfour" >
+      {% elif p.safety == "poor" %}
+
+  <div class="containerfive" >
+
+    {% elif p.safety == "okay" %}
+
+  <div class="containersix" >
+    {% elif p.safety == "good" %}
+
+  <div class="containerseven">
+      {% elif p.safety == "great" %}
+
+  <div class="containereight">
+
+    {% elif p.safety == "amazing" %}
+
+  <div class="containernine">
+    {% else %}
+
+  <div class="containerten">
+    {% endif %}
+      <table>
+          <tr>
+          <td class="one">
+              <img src="{{p.picurl}}" alt="{{p.title}}" style="width:175px;"/>
+          </td>
+          <td class="two">
+              <h2>{{p.title}}</h2>
+              <p>{{p.description}}</p>
+              <p><b><br>Funds Raised: ${{p.funding}} out of ${{p.goal}}</b></p>
+              <progress value = "{{p.funding}}" max = "{{p.goal}}" style="width:100%;"/>
+
+
+
+
+
+          </td>
+          <td class="three">
+              <a href="{{p.url}}" target="_blank">Go to Project</a>
+          </td>
+          </tr>
+
+
+
+      </table>
+
+
+    </div>
+      <p></p>
+      <p></p>
+
+
+
+{% endfor %}
+
+{% else %}
+ <div class="banner">
+  <img src="../static/country.png" alt="the continents in blue and purple" style="width:100%;">
+    <div class="centered">No Results</div>
+</div>
+
+
+{% endif %}
+
+</body>
+</html>
